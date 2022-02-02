@@ -23,14 +23,12 @@
     enable = true;
     userName = "miyamoen";
     userEmail = "akihito.biblioteca@gmail.com";
-    aliases = {
-      st = "status";
-    };
+    aliases = { st = "status"; };
   };
 
   # https://github.com/cli/cli/issues/4955
   # モジュールで入れるとlogin時に設定ファイルに書き込もうとしてこけるので直るまでhome.packagesで入れる
   # programs.gh.enable = true;
 
-  home.packages = [ pkgs.gh ];
+  home.packages = [ pkgs.gh pkgs.nixfmt ];
 }
