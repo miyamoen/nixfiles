@@ -30,5 +30,28 @@
   # モジュールで入れるとlogin時に設定ファイルに書き込もうとしてこけるので直るまでhome.packagesで入れる
   # programs.gh.enable = true;
 
-  home.packages = [ pkgs.gh pkgs.nixfmt ];
+  programs.fish.enable = true;
+  programs.fish.plugins = [
+    # nix用のpathとか設定してくれる
+    {
+      name = "nix-env.fish";
+      src = pkgs.fetchFromGitHub {
+        owner = "lilyball";
+        repo = "nix-env.fish";
+        rev = "7b65bd228429e852c8fdfa07601159130a818cfa";
+        sha256 = "069ybzdj29s320wzdyxqjhmpm9ir5815yx6n522adav0z2nz8vs4";
+      };
+    }
+  ];
+
+  programs.starship = {
+    enable = true;
+    enableFishIntegration = true;
+    settings = {
+      add_newline = true;
+      directory = { truncation_length = 150; };
+    };
+  };
+
+  home.packages = [ pkgs.gh pkgs.nixfmt pkgs.nix-prefetch-scripts ];
 }
