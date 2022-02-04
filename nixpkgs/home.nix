@@ -1,7 +1,13 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = [ pkgs.gh pkgs.nixfmt pkgs.nix-prefetch-scripts ];
+  home.packages = with pkgs; [
+    gh
+    nixfmt
+    nix-prefetch-scripts
+    # wsl上では意味ない
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+  ];
 
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
@@ -31,6 +37,8 @@
   # https://github.com/cli/cli/issues/4955
   # モジュールで入れるとlogin時に設定ファイルに書き込もうとしてこけるので直るまでhome.packagesで入れる
   # programs.gh.enable = true;
+
+  fonts.fontconfig.enable = true;
 
   programs.fish.enable = true;
   programs.fish.plugins = [
