@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 {
+  home.packages = [ pkgs.gh pkgs.nixfmt pkgs.nix-prefetch-scripts ];
+
   # Home Manager needs a bit of information about you and the
   # paths it should manage.
   home.username = "miyamo";
@@ -53,5 +55,9 @@
     };
   };
 
-  home.packages = [ pkgs.gh pkgs.nixfmt pkgs.nix-prefetch-scripts ];
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    config = { global.strict_env = true; };
+  };
 }
