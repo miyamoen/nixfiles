@@ -38,6 +38,8 @@
   # モジュールで入れるとlogin時に設定ファイルに書き込もうとしてこけるので直るまでhome.packagesで入れる
   # programs.gh.enable = true;
 
+  programs.lazygit.enable = true;
+
   fonts.fontconfig.enable = true;
 
   programs.fish.enable = true;
