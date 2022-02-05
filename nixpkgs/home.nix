@@ -59,7 +59,18 @@
     enableFishIntegration = true;
     settings = {
       add_newline = true;
-      directory = { truncation_length = 150; };
+      directory = {
+        truncate_to_repo = false;
+        home_symbol = "🏡";
+      };
+      battery.display.threshold = 50;
+      character = {
+        success_symbol = "[➜](bold green) ";
+        error_symbol = "[✗](bold red) ";
+      };
+      cmd_duration.show_notifications = true;
+      git_branch.symbol = "";
+      nix_shell.symbol = "❄️";
     };
   };
 
