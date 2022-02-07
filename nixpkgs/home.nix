@@ -5,6 +5,7 @@
     gh
     nixfmt
     nix-prefetch-scripts
+    niv
     # wsl上では意味ない
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
   ];
