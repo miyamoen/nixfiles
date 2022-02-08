@@ -1,13 +1,12 @@
-{ config, pkgs, ... }:
-
-{
+{ config, pkgs, ... }: {
+  # https://nix-community.github.io/home-manager/options.html
   home.packages = with pkgs; [
     gh
     nixfmt
     nix-prefetch-scripts
     niv
-    # wsl上では意味ない
-    (nerdfonts.override { fonts = [ "FiraCode" ]; })
+    delta # https://dandavison.github.io/delta/
+    (nerdfonts.override { fonts = [ "FiraCode" ]; }) # wsl上では意味ない
   ];
 
   # Home Manager needs a bit of information about you and the
@@ -32,14 +31,34 @@
     enable = true;
     userName = "miyamoen";
     userEmail = "akihito.biblioteca@gmail.com";
-    aliases = { st = "status"; };
+    aliases = {
+      fap = "fetch --all --prune";
+      sdom = "switch --detach origin/master";
+    };
+    delta = {
+      enable = true;
+      options = { };
+    };
   };
 
   # https://github.com/cli/cli/issues/4955
   # モジュールで入れるとlogin時に設定ファイルに書き込もうとしてこけるので直るまでhome.packagesで入れる
   # programs.gh.enable = true;
 
-  programs.lazygit.enable = true;
+  programs.lazygit = {
+    enable = true;
+    # https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md
+    settings = {
+      git.paging = {
+        colorArg = "always";
+        pager = "delta --dark --paging=never";
+      };
+      os = {
+        editCommand = "code";
+        editCommandTemplate = "{{editor}} --goto {{filename}}:{{line}}";
+      };
+    };
+  };
 
   fonts.fontconfig.enable = true;
 
@@ -56,6 +75,23 @@
       };
     }
   ];
+
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+    options = [ "--cmd d" ]; # d, diにalias
+  };
+
+  programs.fzf = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    config = { global.strict_env = true; };
+  };
 
   programs.starship = {
     enable = true;
@@ -77,9 +113,4 @@
     };
   };
 
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-    config = { global.strict_env = true; };
-  };
 }
