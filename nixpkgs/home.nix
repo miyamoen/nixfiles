@@ -15,7 +15,8 @@
     # Home Manager needs a bit of information about you and the
     # paths it should manage.
     username = "miyamo";
-    homeDirectory = "/home/miyamo";
+    homeDirectory =
+      if pkgs.stdenv.isDarwin then "/Users/miyamo" else "/home/miyamo";
 
     # This value determines the Home Manager release that your
     # configuration is compatible with. This helps avoid breakage
