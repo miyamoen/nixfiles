@@ -8,6 +8,7 @@
       nix-prefetch-scripts
       niv
       delta # https://dandavison.github.io/delta/
+      tokei # https://github.com/XAMPPRocky/tokei
       (nerdfonts.override { fonts = [ "FiraCode" ]; }) # wsl上では意味ない
     ];
 
@@ -77,6 +78,8 @@
         };
       }
     ];
+
+    lsd.enable = true;
 
     zoxide = {
       enable = true;
