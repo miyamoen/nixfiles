@@ -5,7 +5,9 @@
     packages = with pkgs; [
       gh
       nixfmt
-      nix-prefetch-scripts
+      # macでビルドしたらpythonを丸ごとbuidしだして失敗した
+      # hash値欲しいときだけ入れればいいのでmacでどうするかはあんまり解決する気ない
+      # nix-prefetch-scripts
       niv
       delta # https://dandavison.github.io/delta/
       tokei # https://github.com/XAMPPRocky/tokei
